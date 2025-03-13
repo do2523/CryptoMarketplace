@@ -1,0 +1,28 @@
+{
+  "name": "cryptomarketplace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "predev": "npm install concurrently",
+    "dev": "concurrently --kill-others \"npm run frontend\" \"npm run backend\"",
+    "frontend": "cd ./frontend && npm run dev",
+    "backend": "cd ./backend && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/do2523/CryptoMarketplace.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "./*"
+  ],
+  "bugs": {
+    "url": "https://github.com/do2523/CryptoMarketplace/issues"
+  },
+  "homepage": "https://github.com/do2523/CryptoMarketplace#readme",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

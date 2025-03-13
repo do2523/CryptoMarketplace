@@ -1,13 +1,12 @@
 # Crypto Marketplace
 Crypto Marketplace is a cryptocurrency tracking and alert platform, offering a Robinhood-like interface for monitoring the crypto market.  This application allows users to visualize historical transaction data extracted from the blockchain and observe wallet activities.
 
-*   **Frontend:**
-    *   `React`:  A modular UI component system for building a dynamic and responsive frontend.
-    *   `Typescript`: Ensures code safety and maintainability.
-*   **Backend:**
-    *   `Node.js`: Powers the server-side logic and API endpoints.
-    *   `Express`: Simplifies API creation and routing.
-    *   `PostgreSQL`:  A robust and performant database for storing application data.
+## Technologies
+*   `React`:  A modular UI component system for building a dynamic and responsive frontend.
+*   `Typescript`: Ensures code safety and maintainability.
+*   `Node.js`: Powers the server-side logic and API endpoints.
+*   `Express`: Simplifies API creation and routing.
+*   `PostgreSQL`:  A robust and performant database for storing application data.
 
 ## Features
 *   **Market Overview:** Real-time prices and price changes for various cryptocurrencies.
@@ -25,13 +24,7 @@ git clone https://github.com/do2523/CryptoMarketplace.git
 cd ./CryptoMarketplace
 ```
 
-Enter the *frontend* directory and install all the dependencies needed for the server to run.
-```sh
-cd ./frontend
-npm install
-```
-
-Now you can run the server in development mode from the *frontend* directory using:
+Running `npm run dev` will automatically install all dependencies needed for the project to run and start the backend and frontend concurrently.
 ```sh
 npm run dev
 ```
