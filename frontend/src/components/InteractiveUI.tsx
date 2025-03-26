@@ -22,7 +22,7 @@ export function SplineSceneBasic() {
           <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
             Crypto Market Place
           </h1>
-          <p className="mt-4 text-neutral-300 max-w-lg">
+          <p className="mt-4 text-neutral-300 max-w-lg text-2xl ">
           Transform your cryptocurrency experience with AI, making it easier, smarter, and more personalized for you.
           </p>
         </div>

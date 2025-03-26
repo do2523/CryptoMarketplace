@@ -4,8 +4,8 @@ export default function Carousel() {
         <div className="carousel w-full">
   <div id="item1" className="carousel-item w-full">
     <img
-      src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-      className="w-full" />
+      src="../images/updateme.jpg"
+      className="w-full height-200" />
   </div>
   <div id="item2" className="carousel-item w-full">
     <img
