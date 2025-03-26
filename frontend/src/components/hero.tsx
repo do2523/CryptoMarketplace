@@ -34,7 +34,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 flex justify-center opacity-50">
-        <img src="/placeholder-chart.png" alt="Crypto Chart" className="w-3/4 max-w-lg" />
+        <img src="../images/chart.png" alt="Crypto Chart" className="w-3/4 max-w-lg" />
       </div>
     </section>
   );
