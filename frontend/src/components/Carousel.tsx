@@ -1,7 +1,6 @@
 export default function Carousel() {
     return (
         <>
-        <h1>Welcome</h1>
         <div className="carousel w-full">
   <div id="item1" className="carousel-item w-full">
     <img

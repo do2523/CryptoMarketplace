@@ -4,14 +4,14 @@ import './index.css'
 import App from './App.tsx'
 import Navbar from './components/Navbar.tsx'
 import Carousel from './components/Carousel.tsx'
-import HeroSection  from './components/hero.tsx'
+import SectionTwo from './components/section-two.tsx'
 import { SplineSceneBasic } from './components/InteractiveUI.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Navbar />
     <SplineSceneBasic />
-    <HeroSection />
+    <SectionTwo />
     <Carousel />
     <App />
   </StrictMode>,
