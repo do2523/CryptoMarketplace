@@ -12,8 +12,8 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Navbar />
     <SplineSceneBasic />
-    <SectionTwo />
     <SectionThree />
+    <SectionTwo />
     <Carousel />
     <App />
   </StrictMode>,
