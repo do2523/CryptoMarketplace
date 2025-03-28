@@ -7,6 +7,9 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
 
     /* Linting */
     "noImplicitAny": true,
