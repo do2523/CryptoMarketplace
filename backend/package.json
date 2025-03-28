@@ -12,13 +12,18 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.8.4",
+    "bitcoinjs-lib": "^6.1.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "ecpair": "^3.0.0",
     "express": "^4.21.2",
+    "tiny-secp256k1": "^2.2.3",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
     "nodemon": "^3.1.9"
   }
 }
