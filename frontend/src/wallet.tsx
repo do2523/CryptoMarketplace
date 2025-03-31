@@ -15,6 +15,8 @@ export default function Wallet() {
         balance: 0,
     });
 
+    const [btcPrice, setBtcPrice] = useState("");
+
     useEffect(() => {
         const getWallet = async (): Promise<Wallet> => {
             
@@ -24,7 +26,6 @@ export default function Wallet() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*",
                 }
             });
 
@@ -32,6 +33,7 @@ export default function Wallet() {
         };
 
         getWallet().then((result) => {
+            // result.address = "bc1qk3hl2y0vel5way62v7827hxfvl5hc9w7g5ldpw";
             setWallet(result);
         });
     }, []);
@@ -51,12 +53,31 @@ export default function Wallet() {
             setBalance(result);
         });
     }, [wallet.address]);
+
+    useEffect(() => {
+        const getPrice = async(): Promise<number> => {
+            const response = await fetch(`http://localhost:5000/api/getBtcPrice`);
+
+            return await response.json();
+        }
+        const updateBitcoinPrice = () => {
+            getPrice().then((result) => {
+                setBtcPrice(result.toString());
+            });
+        }
+
+        updateBitcoinPrice();
+
+        setInterval(updateBitcoinPrice, 10000);
+    });
     
     return <>
         <h1>Bitcoin</h1>
         <br/>
         <a>Wallet address: {wallet.address}</a>
         <br/>
-        <a>Balance: {balance.balance}</a>
+        <a>Balance: {balance.balance} BTC</a>
+        <br/>
+        <a>Current bitcoin price: {btcPrice} USD</a>
     </>
 }

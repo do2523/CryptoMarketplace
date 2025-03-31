@@ -36,8 +36,6 @@ export async function getBalance(req: express.Request, res: express.Response) {
   const url = `https://blockchain.info/rawaddr/${address}`;
   const data = (await fetch(url));
 
-  console.log(data);
-
   const address_data = await data.json() as SingleAddress;
 
   console.log(address_data.n_tx);
@@ -52,3 +50,27 @@ export async function getBalance(req: express.Request, res: express.Response) {
 
   res.json({ balance: address_data.final_balance / 1e8 }); // Convert satoshis to BTC
 };
+
+const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
+
+export async function getBitcoinPrice(_req: express.Request, res: express.Response) {
+    const response = await fetch(COINGECKO_API_URL);
+
+    if (!response.ok || response.status == 429) {
+      res.status(response.status);
+      return;
+    }
+    
+    const data = await response.json() as {bitcoin: {usd: number}};
+
+    const price = data.bitcoin.usd;
+
+    if (typeof price !== 'number') {
+      throw new Error('Invalid price data received from API');
+    }
+
+    res.json(price);
+}
+
+// Update the price every 5 seconds (adjust as needed)
+// setInterval(updateBitcoinPrice, 10000);
