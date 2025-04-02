@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { Demo } from './components/demo.tsx'
 import Navbar from './components/Navbar.tsx'
+import EtheriumDisplay from './components/etherButton.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

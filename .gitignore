@@ -2,3 +2,5 @@
 **/.vscode
 **/dist
 .env
+sp500.csv
+myenv
