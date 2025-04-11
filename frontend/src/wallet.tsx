@@ -1,58 +1,19 @@
 import { useEffect, useState } from "react";
-
-type Wallet = {
-    address: string,
-    private_key: string,
-}
+import TransactionTable from "./components/TransactionTable";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 export default function Wallet() {
-    const [wallet, setWallet] = useState({
-        address: "",
-        private_key: ""
-    });
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
 
-    const [balance, setBalance] = useState({
-        balance: 0,
-    });
+    // todo: implement search
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [address, setAddress] = useState(queryParams.get('address'));
+
+    console.log(address);
 
     const [btcPrice, setBtcPrice] = useState("");
-
-    useEffect(() => {
-        const getWallet = async (): Promise<Wallet> => {
-            
-            // GET request using fetch inside useEffect React hook
-            const response = await fetch('http://localhost:5000/api/wallet', {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                }
-            });
-
-            return await response.json();
-        };
-
-        getWallet().then((result) => {
-            // result.address = "bc1qk3hl2y0vel5way62v7827hxfvl5hc9w7g5ldpw";
-            setWallet(result);
-        });
-    }, []);
-
-    useEffect(() => {
-        if (wallet.address == "") {
-            return;
-        }
-        
-        const getBalance = async(): Promise<{balance: number}> => {
-            const response = await fetch(`http://localhost:5000/api/getBalance?address=${wallet.address}`);
-
-            return await response.json();
-        }
-
-        getBalance().then((result) => {
-            setBalance(result);
-        });
-    }, [wallet.address]);
 
     useEffect(() => {
         const getPrice = async(): Promise<number> => {
@@ -74,10 +35,9 @@ export default function Wallet() {
     return <>
         <h1>Bitcoin</h1>
         <br/>
-        <a>Wallet address: {wallet.address}</a>
-        <br/>
-        <a>Balance: {balance.balance} BTC</a>
+        <a>Wallet address: {address}</a>
         <br/>
         <a>Current bitcoin price: {btcPrice} USD</a>
+        <TransactionTable wallet_address={address} />
     </>
 }

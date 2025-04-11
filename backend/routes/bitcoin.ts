@@ -47,8 +47,26 @@ export async function getBalance(req: express.Request, res: express.Response) {
     return;
   }
   
-
   res.json({ balance: address_data.final_balance / 1e8 }); // Convert satoshis to BTC
+};
+
+// Get transactions (limit of 50 per page)
+export async function getTransactions(req: express.Request, res: express.Response) {
+  const address = req.query.address;
+
+  const url = `https://blockchain.info/rawaddr/${address}`;
+  const data = (await fetch(url));
+
+  const address_data = await data.json();
+
+  console.log(address_data);
+
+  if (data.status == 429) {
+    res.statusCode = 429;
+    return;
+  }
+  
+  res.json(address_data); // Convert satoshis to BTC
 };
 
 const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
