@@ -11,11 +11,13 @@
     "preview": "vite preview"
   },
   "optionalDependencies": {
-    "@tailwindcss/oxide-win32-x64-msvc": "^4.0.12",
-    "@tailwindcss/oxide-darwin-x64": "^4.0.15"
-   },
+    "@tailwindcss/oxide-darwin-x64": "^4.0.15",
+    "@tailwindcss/oxide-win32-x64-msvc": "^4.0.12"
+  },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.1.2",
+    "@radix-ui/react-accordion": "^1.2.4",
+    "@radix-ui/react-avatar": "^1.1.4",
+    "@radix-ui/react-slot": "^1.2.0",
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.81",
     "@tailwindcss/vite": "^4.0.12",

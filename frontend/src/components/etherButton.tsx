@@ -7,7 +7,7 @@ export default function EtheriumDisplay() {
 
     useEffect(() => {
         const getEtherium = async(): Promise<void> => {
-            const response = await fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${process.env.REACT_APP_API_KEY}`)
+            const response = await fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=6JZJYXBXT1J3R2F2TFHCNHK2ANNT9C8A5I`)
             const data =  await response.json();
             if (data.result && data.result.ethusd) {
                 setethusd(data.result.ethusd);
@@ -17,6 +17,6 @@ export default function EtheriumDisplay() {
     }, []);
 
     return(
-        <p>{ethusd}</p>
+        <p>Etherium Price: {ethusd}</p>
     )
 }
