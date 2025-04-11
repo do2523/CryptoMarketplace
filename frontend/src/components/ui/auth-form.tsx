@@ -15,8 +15,13 @@ const AuthForm: React.FC = () => {
         transition={{ duration: 1.25, ease: "easeInOut" }}
         className="relative z-10 mx-auto w-full max-w-xl p-4"
       >
-        <Logo />
+        {/* <Logo /> */}
         <Header />
+        <SocialButtons />
+        <Divider />
+        <LoginForm />
+        <EmptyDivider />
+        <SignupHeader />
         <SocialButtons />
         <Divider />
         <LoginForm />
@@ -46,16 +51,16 @@ const Button: React.FC<ButtonProps> = ({ children, className, ...props }) => (
   </button>
 )
 
-const Logo: React.FC = () => (
-  <div className="mb-6 flex justify-center">
-    <img
-      src="https://svgl.app/library/tailwindcss.svg"
-      alt="Logoipsum"
-      className="h-8 w-8"
-    />
-    <span className="ml-2 text-xl font-bold">TailwindCSS</span>
-  </div>
-)
+// const Logo: React.FC = () => (
+//   <div className="mb-6 flex justify-center">
+//     <img
+//       src="https://svgl.app/library/tailwindcss.svg"
+//       alt="Logoipsum"
+//       className="h-8 w-8"
+//     />
+//     <span className="ml-2 text-xl font-bold">TailwindCSS</span>
+//   </div>
+// )
 
 const Header: React.FC = () => (
   <div className="mb-6 text-center">
@@ -69,12 +74,18 @@ const Header: React.FC = () => (
   </div>
 )
 
+const SignupHeader: React.FC = () => (
+  <div className="mb-6 text-center">
+    <h1 className="text-2xl font-semibold">Sign up</h1>
+  </div>
+)
+
 const SocialButtons: React.FC = () => (
   <div className="mb-6 space-y-3">
     <div className="grid grid-cols-2 gap-3">
-      <SocialButton icon={<Twitter size={20} />} />
-      <SocialButton icon={<Github size={20} />} />
-      <SocialButton fullWidth>Sign in with SSO</SocialButton>
+      {/* <SocialButton icon={<Twitter size={20} />} /> */}
+      <SocialButton fullWidth icon={<Github />} />
+      {/* <SocialButton fullWidth>Sign in with SSO</SocialButton> */}
     </div>
   </div>
 )
@@ -103,6 +114,11 @@ const Divider: React.FC = () => (
     <div className="h-[1px] w-full bg-zinc-300 dark:bg-zinc-700" />
     <span className="text-zinc-500 dark:text-zinc-400">OR</span>
     <div className="h-[1px] w-full bg-zinc-300 dark:bg-zinc-700" />
+  </div>
+)
+
+const EmptyDivider: React.FC = () => (
+  <div className="mt-40 mb-4 flex items-center gap-3">
   </div>
 )
 

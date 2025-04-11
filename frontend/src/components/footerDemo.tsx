@@ -8,21 +8,21 @@ function Demo() {
         logo={<Hexagon className="h-10 w-10" />}
         brandName="Crypto Marketplace"
         socialLinks={[
-          {
-            icon: <Twitter className="h-5 w-5" />,
-            href: "https://twitter.com",
-            label: "Twitter",
-          },
+          // {
+          //   icon: <Twitter className="h-5 w-5" />,
+          //   href: "https://twitter.com",
+          //   label: "Twitter",
+          // },
           {
             icon: <Github className="h-5 w-5" />,
-            href: "https://github.com",
+            href: "https://github.com/do2523/CryptoMarketplace",
             label: "GitHub",
           },
         ]}
         mainLinks={[
-          { href: "/products", label: "Products" },
+          { href: "/signup", label: "Sign In" },
+          { href: "/", label: "Home" },
           { href: "/about", label: "About" },
-          { href: "/blog", label: "Blog" },
           { href: "/contact", label: "Contact" },
         ]}
         legalLinks={[
