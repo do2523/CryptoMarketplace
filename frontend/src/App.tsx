@@ -3,6 +3,7 @@ import './App.css'
 import Wallet from './wallet'
 import Homepage from './homepage'
 import Signup from './signup'
+import { Faq3Demo } from './components/faq'
 import Profile from './profile'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/faq" element={<Faq3Demo />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
     </BrowserRouter>
