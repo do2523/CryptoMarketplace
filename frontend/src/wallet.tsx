@@ -1,43 +1,71 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TransactionTable from "./components/TransactionTable";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function Wallet() {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-
     // todo: implement search
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [address, setAddress] = useState(queryParams.get('address'));
+    const [address, setAddress] = useState(searchParams.get("address"));
 
-    console.log(address);
+    const [input, setInput] = useState("");
 
-    const [btcPrice, setBtcPrice] = useState("");
+    const [seed, setSeed] = useState(1);
 
-    useEffect(() => {
-        const getPrice = async(): Promise<number> => {
-            const response = await fetch(`http://localhost:5000/api/getBtcPrice`);
+    const reset = () => {
+        setSeed(Math.random());
+    }
 
-            return await response.json();
-        }
-        const updateBitcoinPrice = () => {
-            getPrice().then((result) => {
-                setBtcPrice(result.toString());
-            });
-        }
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
 
-        updateBitcoinPrice();
+        setAddress(input)
+        setSearchParams({ address: input })
 
-        setInterval(updateBitcoinPrice, 10000);
-    });
+        reset();
+    };
     
     return <>
-        <h1>Bitcoin</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">Bitcoin</h1>
         <br/>
-        <a>Wallet address: {address}</a>
-        <br/>
-        <a>Current bitcoin price: {btcPrice} USD</a>
-        <TransactionTable wallet_address={address} />
+
+        {address ? <div>
+            <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto mb-6 flex gap-2">
+            <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Enter Bitcoin wallet address"
+                className="flex-grow px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+            <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+                Search
+            </button>
+            </form>
+
+            <TransactionTable wallet_address={address} key={seed} />
+        </div> :
+        <div>
+            <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto mb-6 flex gap-2">
+            <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Enter Bitcoin wallet address"
+                className="flex-grow px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+            <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+                Search
+            </button>
+            </form>
+        </div>
+        }
+       
     </>
 }

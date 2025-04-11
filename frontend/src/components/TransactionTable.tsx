@@ -34,9 +34,11 @@ export default function TransactionTable({ wallet_address }: { wallet_address: s
     const formatAmount = (value: number) => (value / 1e8).toFixed(8);
 
     const [data, setData] = useState({} as WalletProps);
+    const [tooManyRequests, setTooManyRequests] = useState(false);
     
     useEffect(() => {
         const getTransactions = async (): Promise<WalletProps> => {
+            console.log("sending");
             const response = await fetch(`http://localhost:5000/api/getTransactions?address=${wallet_address}`, {
                 method: "GET",
                 headers: {
@@ -44,6 +46,14 @@ export default function TransactionTable({ wallet_address }: { wallet_address: s
                     'Content-Type': 'application/json',
                 }
             });
+
+            console.log(response.status);
+
+            if (response.status == 429) {
+                setTooManyRequests(true);
+            } else {
+                setTooManyRequests(false);
+            }
 
             return await response.json();
         };
@@ -57,44 +67,46 @@ export default function TransactionTable({ wallet_address }: { wallet_address: s
       <div className="p-4">
         <h2 className="text-2xl font-bold mb-4">Transaction History for {wallet_address}</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full dark rounded-xl shadow-md">
+        {data.txs ? 
+            <table className="min-w-full dark rounded-xl shadow-md">
             <thead>
-              <tr className="dark text-left text-sm font-semibold text-gray-300">
+                <tr className="dark text-left text-sm font-semibold text-gray-300">
                 <th className="p-3">Date</th>
                 <th className="p-3">Type</th>
                 <th className="p-3">Amount (BTC)</th>
                 <th className="p-3">Fee (BTC)</th>
                 <th className="p-3">Balance (BTC)</th>
                 <th className="p-3">Transaction</th>
-              </tr>
+                </tr>
             </thead>
             <tbody>
-              {data.txs ? data.txs.map((tx) => {
+                {data.txs.map((tx) => {
                 const isSent = tx.result < 0;
                 const rowStyle = isSent ? "text-red-600" : "text-green-600";
                 return (
-                  <tr key={tx.hash} className="border-t text-sm hover:bg-gray-50 dark:hover:bg-gray-900">
+                    <tr key={tx.hash} className="border-t text-sm hover:bg-gray-50 dark:hover:bg-gray-900">
                     <td className="p-3">{new Date(tx.time * 1000).toLocaleString()}</td>
                     <td className={`p-3 font-medium ${rowStyle}`}>
-                      {isSent ? "Sent" : "Received"}
+                        {isSent ? "Sent" : "Received"}
                     </td>
                     <td className="p-3">{formatAmount(Math.abs(tx.result))}</td>
                     <td className="p-3">{formatAmount(tx.fee)}</td>
                     <td className="p-3">{formatAmount(tx.balance)}</td>
                     <td className="p-">
-                      <a
+                        <a
                         // href={`https://www.blockchain.com/btc/tx/${tx.hash}`}
                         // target="_blank"
                         // rel="noopener noreferrer"
-                      >
+                        >
                         {tx.hash.slice(0, 10)}...
-                      </a>
+                        </a>
                     </td>
-                  </tr>
+                    </tr>
                 );
-              }): <tr></tr>}
+                })}
             </tbody>
-          </table>
+            </table> : tooManyRequests ? <p className="text-lg font-bold mb-4 text-red-600 text-center">Too many requests</p> : "Loading..."
+        }
         </div>
       </div>
     );

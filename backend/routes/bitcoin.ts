@@ -57,15 +57,15 @@ export async function getTransactions(req: express.Request, res: express.Respons
   const url = `https://blockchain.info/rawaddr/${address}`;
   const data = (await fetch(url));
 
+  if (data.status == 429) {
+    res.statusCode = 429;
+    return res.json("aa");
+  }
+
   const address_data = await data.json();
 
   console.log(address_data);
 
-  if (data.status == 429) {
-    res.statusCode = 429;
-    return;
-  }
-  
   res.json(address_data); // Convert satoshis to BTC
 };
 
