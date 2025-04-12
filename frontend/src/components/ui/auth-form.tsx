@@ -4,6 +4,7 @@ import * as React from "react"
 import { ChevronLeft, Github, Twitter } from "lucide-react"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
+import { useNavigate } from "react-router-dom"
 
 const AuthForm: React.FC = () => {
   return (
@@ -32,9 +33,18 @@ const AuthForm: React.FC = () => {
   )
 }
 
-const BackButton: React.FC = () => (
-  <SocialButton icon={<ChevronLeft size={16} />}>Go back</SocialButton>
-)
+const BackButton: React.FC = () => {
+  const navigate = useNavigate()
+  const handleGoHome = () => {
+    navigate("/")
+  }
+
+  return (
+    <SocialButton icon={<ChevronLeft size={16} />} onClick={handleGoHome}>Go back</SocialButton>
+  )
+}
+  
+
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
@@ -62,20 +72,32 @@ const Button: React.FC<ButtonProps> = ({ children, className, ...props }) => (
 //   </div>
 // )
 
-const Header: React.FC = () => (
-  <div className="mb-6 text-center">
+const Header: React.FC = () => {
+  const handleScrollToSignup = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const target = document.getElementById("signup")
+    if(target){
+      target.scrollIntoView({behavior: "smooth"})
+    }
+  }
+  return (
+    <div className="mb-6 text-center">
     <h1 className="text-2xl font-semibold">Sign in to your account</h1>
     <p className="mt-2 text-zinc-500 dark:text-zinc-400">
       Don't have an account?{" "}
-      <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline">
+      <a 
+        href="#signup" 
+        onClick={handleScrollToSignup}
+        className="text-blue-600 dark:text-blue-400 hover:underline">
         Create one.
       </a>
     </p>
   </div>
-)
+  )
+}
 
 const SignupHeader: React.FC = () => (
-  <div className="mb-6 text-center">
+  <div id="signup" className="mb-6 text-center">
     <h1 className="text-2xl font-semibold">Sign up</h1>
   </div>
 )
@@ -90,11 +112,19 @@ const SocialButtons: React.FC = () => (
   </div>
 )
 
-const SocialButton: React.FC<{
+interface SocialButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode
   fullWidth?: boolean
   children?: React.ReactNode
-}> = ({ icon, fullWidth, children }) => (
+}
+
+const SocialButton: React.FC<SocialButtonProps> = ({
+  icon,
+  fullWidth,
+  children,
+  className,
+  ...props
+}) => (
   <button
     className={`relative z-0 flex items-center justify-center gap-2 overflow-hidden rounded-md 
     border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 
@@ -102,12 +132,14 @@ const SocialButton: React.FC<{
     before:absolute before:inset-0 before:-z-10 before:translate-x-[150%] before:translate-y-[150%] before:scale-[2.5]
     before:rounded-[100%] before:bg-zinc-800 dark:before:bg-zinc-200 before:transition-transform before:duration-1000 before:content-[""]
     hover:scale-105 hover:text-zinc-100 dark:hover:text-zinc-900 hover:before:translate-x-[0%] hover:before:translate-y-[0%] active:scale-95
-    ${fullWidth ? "col-span-2" : ""}`}
+    ${fullWidth ? "col-span-2" : ""} ${className ?? ""}`}
+    {...props}
   >
     {icon}
     <span>{children}</span>
   </button>
 )
+
 
 const Divider: React.FC = () => (
   <div className="my-6 flex items-center gap-3">

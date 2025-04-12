@@ -3,7 +3,7 @@ import NavHeader from "./nav-header"
 export default function Navbar() {
     return (
         <>
-        <div className="navbar shadow-sm" style={{backgroundColor: "#000000F5"}}>
+        <div className="navbar shadow-sm z-9" style={{backgroundColor: "#000000F5"}}>
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

@@ -10,7 +10,7 @@ app.use(express.json())
 app.post('/api/wallet', createWallet);
 app.get("/api/getBalance", getBalance);
 app.get("/api/getBtcPrice", getBitcoinPrice);
-app.get("/api/getTransactions", getTransactions);
+//app.get("/api/getTransactions", getTransactions);
 
 const PORT = 5000;
 app.listen(PORT, () => {

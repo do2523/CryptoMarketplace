@@ -18,8 +18,8 @@ function NavHeader() {
       <Tab href="/" setPosition={setPosition}>Home</Tab>
       <Tab href="/wallet" setPosition={setPosition}>Wallet</Tab>
       <Tab href="/profile" setPosition={setPosition}>Profile</Tab>
-      <Tab href="" setPosition={setPosition}>About</Tab>
-      <Tab href="" setPosition={setPosition}>Contact</Tab>
+      <Tab href="/" setPosition={setPosition}>About</Tab>
+      <Tab href="/" setPosition={setPosition}>Contact</Tab>
 
       <Cursor position={position} />
     </ul>
