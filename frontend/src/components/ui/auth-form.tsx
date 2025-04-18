@@ -5,6 +5,7 @@ import { ChevronLeft, Github, Twitter } from "lucide-react"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { useNavigate } from "react-router-dom"
+import GoogleSignIn from "@/GoogleSignIn"
 
 const AuthForm: React.FC = () => {
   return (
@@ -106,6 +107,7 @@ const SocialButtons: React.FC = () => (
   <div className="mb-6 space-y-3">
     <div className="grid grid-cols-2 gap-3">
       {/* <SocialButton icon={<Twitter size={20} />} /> */}
+      <GoogleSignIn />
       <SocialButton fullWidth icon={<Github />} />
       {/* <SocialButton fullWidth>Sign in with SSO</SocialButton> */}
     </div>
